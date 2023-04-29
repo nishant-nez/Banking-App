@@ -1,4 +1,4 @@
-import 'package:banking_app/pages/login.dart';
+import 'package:banking_app/pages/pre_login.dart';
 import 'package:flutter/material.dart';
 
 class GetStarted extends StatelessWidget {
@@ -15,8 +15,10 @@ class GetStarted extends StatelessWidget {
           children: [
             Positioned(
               top: 50,
-              right: 15,
+              right: 22,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 // crossAxisAlignment: CrossAxisAlignment.values.single,
                 children: const [
                   Text(
@@ -71,7 +73,7 @@ class GetStarted extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Login(),
+                            builder: (context) => PreLogin(),
                           ),
                         );
                       },
