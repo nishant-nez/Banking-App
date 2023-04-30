@@ -67,6 +67,7 @@ flutter:
     - assets/images/myqr.png
     - assets/images/visa-1.png
     - assets/images/visa-2.png
+    - assets/images/user.png
 
     # - assets/fonts
   #   - images/a_dot_burr.jpeg

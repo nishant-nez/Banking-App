@@ -1,10 +1,10 @@
+import 'package:banking_app/pages/home/emi.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import 'home/home.dart';
 import 'home/more.dart';
 import 'home/qr.dart';
-import 'home/send_money.dart';
 
 class HomeNav extends StatefulWidget {
   // const HomeNav({super.key});
@@ -24,7 +24,7 @@ class _HomeNavState extends State<HomeNav> {
     Home(),
     // Payments(),
     QR(),
-    SendMoney(),
+    EMICalculator(),
     More(),
   ];
   int currentindex = 0;
@@ -83,8 +83,8 @@ class _HomeNavState extends State<HomeNav> {
                 text: 'QR',
               ),
               GButton(
-                icon: Icons.money,
-                text: 'Send Money',
+                icon: Icons.calculate,
+                text: 'EMI Calculator',
               ),
               GButton(
                 icon: Icons.more,

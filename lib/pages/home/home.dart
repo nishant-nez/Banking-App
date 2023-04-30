@@ -32,9 +32,11 @@ class _HomeState extends State<Home> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Icon(
-                    Icons.circle,
-                    size: 45,
+                  const CircleAvatar(
+                    backgroundColor: Colors.white,
+                    child: Image(
+                      image: AssetImage('assets/images/user.png'),
+                    ),
                   ),
                 ],
               ),

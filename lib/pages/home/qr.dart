@@ -32,7 +32,7 @@ class _QRState extends State<QR> {
       }
       setState(() {});
     }).catchError((e) {
-      print(e);
+      // print(e);
     });
   }
 
