@@ -8,14 +8,18 @@ import 'home/send_money.dart';
 
 class HomeNav extends StatefulWidget {
   // const HomeNav({super.key});
-  final String name;
-  const HomeNav({super.key, required this.name});
+  late String namee;
+  HomeNav({super.key, required this.namee});
+
+  String get userName => namee;
 
   @override
   State<HomeNav> createState() => _HomeNavState();
 }
 
 class _HomeNavState extends State<HomeNav> {
+  // get
+  // final userName = widget.name;
   final List<Widget> _pages = [
     Home(),
     // Payments(),
@@ -55,6 +59,7 @@ class _HomeNavState extends State<HomeNav> {
           child: GNav(
             onTabChange: (index) {
               setState(() {
+                // print(widget.name);
                 currentindex = index;
               });
             },

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+String username = '';
+
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -113,7 +115,7 @@ class _LoginState extends State<Login> {
                       // PUT INRIA SANS FONT HERE
                       'FORGOT PASSWORD?',
                       style: GoogleFonts.inriaSans(
-                        color: Color.fromRGBO(36, 205, 216, 1),
+                        color: const Color.fromRGBO(36, 205, 216, 1),
                         fontWeight: FontWeight.bold,
                         letterSpacing: 1,
                       ),
@@ -151,7 +153,7 @@ class _LoginState extends State<Login> {
                       // INRIA SANS BOLD
                       'Remember me',
                       style: GoogleFonts.inriaSans(
-                        color: Color.fromRGBO(210, 208, 213, 1),
+                        color: const Color.fromRGBO(210, 208, 213, 1),
                         fontWeight: FontWeight.bold,
                       ),
                     )
@@ -167,14 +169,17 @@ class _LoginState extends State<Login> {
                     onPressed: () {
                       if (_formKey.currentState?.validate() ?? false) {
                         // print(_email.text);
-
+                        setState(() {
+                          username = _email.text.split("@")[0];
+                        });
                         _formKey.currentState?.save();
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => HomeNav(name: _email.text.split("@")[0]),
+                            builder: (context) => HomeNav(namee: _email.text.split("@")[0]),
                           ),
                         );
+
                         final snackBar = SnackBar(
                           content: const Text('Login Successful!'),
                           action: SnackBarAction(
