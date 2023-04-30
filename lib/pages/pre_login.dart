@@ -1,5 +1,6 @@
 import 'package:banking_app/pages/login.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PreLogin extends StatelessWidget {
   const PreLogin({super.key});
@@ -24,35 +25,35 @@ class PreLogin extends StatelessWidget {
               width: screenWidth,
             ),
             const SizedBox(height: 50),
-            const Text(
+            Text(
               'SET YOUR',
-              style: TextStyle(
+              style: GoogleFonts.inriaSans(
                 color: Colors.white,
-                fontSize: 24,
+                fontSize: 26,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 10),
-            const Text(
+            Text(
               'FINANCIAL GOALS',
-              style: TextStyle(
+              style: GoogleFonts.inriaSans(
                 color: Colors.white,
-                fontSize: 24,
+                fontSize: 26,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 45),
-            const Text(
+            Text(
               'Track you expenses and',
-              style: TextStyle(
-                color: Color.fromRGBO(168, 167, 170, 1),
+              style: GoogleFonts.inriaSans(
+                color: const Color.fromRGBO(168, 167, 170, 1),
               ),
             ),
             const SizedBox(height: 10),
-            const Text(
+            Text(
               'manage your finances easily.',
-              style: TextStyle(
-                color: Color.fromRGBO(168, 167, 170, 1),
+              style: GoogleFonts.inriaSans(
+                color: const Color.fromRGBO(168, 167, 170, 1),
               ),
             ),
             const SizedBox(height: 70),
@@ -71,9 +72,15 @@ class PreLogin extends StatelessWidget {
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text('Login  '),
-                    Icon(Icons.keyboard_arrow_right),
+                  children: [
+                    Text(
+                      ' Login  ',
+                      style: GoogleFonts.inriaSans(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Icon(Icons.keyboard_arrow_right),
                   ],
                 ),
               ),

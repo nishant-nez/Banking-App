@@ -1,5 +1,6 @@
 import 'package:banking_app/pages/pre_login.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class GetStarted extends StatelessWidget {
   const GetStarted({super.key});
@@ -20,30 +21,32 @@ class GetStarted extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 // crossAxisAlignment: CrossAxisAlignment.values.single,
-                children: const [
+                children: [
                   Text(
                     'welcome to\n',
-                    style: TextStyle(
+                    style: GoogleFonts.inriaSans(
                       fontSize: 18,
                       color: Colors.black,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   // SizedBox(height: 0),
                   // Container(height: 5, padding: EdgeInsets.zero,),
                   Text(
                     'Nishant\'s Bank\n',
-                    style: TextStyle(
+                    style: GoogleFonts.dosis(
                       fontSize: 30,
                       // color: Color(0x1ad5ad),
-                      color: Color.fromRGBO(26, 213, 173, 1),
+                      color: const Color.fromRGBO(26, 213, 173, 1),
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   // Container(height: 5, padding: EdgeInsets.zero,),
                   Text(
-                    'Bank with confidence,\n    Anytime, Anywhere.',
-                    style: TextStyle(
+                    'Bank with confidence,\n     anytime, anywhere.',
+                    style: GoogleFonts.inriaSans(
                       fontSize: 15,
-                      color: Color.fromRGBO(168, 167, 170, 1),
+                      color: const Color.fromRGBO(168, 167, 170, 1),
                     ),
                   ),
                   // Text('Anytime, Anywhere.\n'),
@@ -77,7 +80,13 @@ class GetStarted extends StatelessWidget {
                           ),
                         );
                       },
-                      child: const Text('Get Started'),
+                      child: Text(
+                        'Get Started',
+                        style: GoogleFonts.inriaSans(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                      ),
                     ),
                   ),
                 ),
