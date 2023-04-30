@@ -12,8 +12,8 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
-  String? _email;
-  String? _password;
+  final _email = TextEditingController();
+  // String? _password;
   bool _isSelected = false;
 
   @override
@@ -71,8 +71,10 @@ class _LoginState extends State<Login> {
                       } else if (!EmailValidator.validate(value)) {
                         return 'Please enter a valid email address';
                       }
+
                       return null;
                     },
+                    controller: _email,
                   ),
                 ),
                 const SizedBox(height: 30),
@@ -164,13 +166,25 @@ class _LoginState extends State<Login> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                     onPressed: () {
                       if (_formKey.currentState?.validate() ?? false) {
+                        // print(_email.text);
+
                         _formKey.currentState?.save();
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => HomePage(),
+                            builder: (context) => HomeNav(name: _email.text.split("@")[0]),
                           ),
                         );
+                        final snackBar = SnackBar(
+                          content: const Text('Login Successful!'),
+                          action: SnackBarAction(
+                            label: 'OK',
+                            onPressed: () {
+                              // Some code to undo the change.
+                            },
+                          ),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
                     },
                     child: Row(
