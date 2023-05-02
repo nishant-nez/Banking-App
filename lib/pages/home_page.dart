@@ -20,7 +20,7 @@ class HomeNav extends StatefulWidget {
 class _HomeNavState extends State<HomeNav> {
   // get
   // final userName = widget.name;
-  final List<Widget> _pages = [
+  final List<Widget> _pages = const [
     Home(),
     // Payments(),
     QR(),
