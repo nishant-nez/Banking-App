@@ -40,6 +40,8 @@ dependencies:
   camera: ^0.10.4
   url_launcher: ^6.1.10
   font_awesome_flutter: ^10.4.0
+  sqflite: ^2.2.8+4
+  logging: ^1.1.1
 
 dev_dependencies:
   flutter_test:

@@ -11,15 +11,13 @@ class HomeNav extends StatefulWidget {
   late String namee;
   HomeNav({super.key, required this.namee});
 
-  String get userName => namee;
+  // String get userName => namee;
 
   @override
   State<HomeNav> createState() => _HomeNavState();
 }
 
 class _HomeNavState extends State<HomeNav> {
-  // get
-  // final userName = widget.name;
   final List<Widget> _pages = const [
     Home(),
     // Payments(),

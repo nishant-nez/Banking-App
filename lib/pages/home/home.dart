@@ -26,7 +26,7 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Welcome, $username!',
+                    'Welcome, ${userlist[0]['name']}!',
                     style: GoogleFonts.inriaSans(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,

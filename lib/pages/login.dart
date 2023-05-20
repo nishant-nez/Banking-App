@@ -1,12 +1,20 @@
+import 'dart:io';
+
 import 'package:banking_app/pages/home_page.dart';
+import 'package:banking_app/pages/signup.dart';
+import 'package:banking_app/widgets/sql_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-String username = '';
+// String username = '';
+List<Map<String, dynamic>> userlist = [];
 
 class Login extends StatefulWidget {
-  const Login({super.key});
+  // const Login({super.key});
+  final List<Map<String, String>> users;
+
+  const Login({super.key, required this.users});
 
   @override
   State<Login> createState() => _LoginState();
@@ -15,11 +23,32 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   final _email = TextEditingController();
+  final _password = TextEditingController();
+
   // String? _password;
   bool _isSelected = false;
+  int found = 0;
+
+  // SQL PART
+  bool _isloading = true;
+
+  void _getUser(String email) async {
+    final data = await SQLHelper.getEmail(email);
+    setState(() {
+      userlist = data;
+      sleep(const Duration(seconds: 1));
+      _isloading = false;
+      // print('VALUE FROM SQL EMAIL SEARCH----------------');
+      // print('entered email: $email');
+      // print(userlist.length);
+      // print(userlist);
+      // print(userlist[0]['name']);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    setState(() {});
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -33,6 +62,25 @@ class _LoginState extends State<Login> {
             fontWeight: FontWeight.bold,
           ),
         ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SignUp(users: widget.users)),
+              );
+            },
+            child: Text(
+              'Sign Up',
+              style: GoogleFonts.inriaSans(
+                color: const Color.fromRGBO(255, 133, 149, 1),
+                fontSize: 17,
+                decoration: TextDecoration.underline,
+                decorationThickness: 1.5,
+              ),
+            ),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -68,12 +116,14 @@ class _LoginState extends State<Login> {
                       // contentPadding: EdgeInsets.symmetric(),
                     ),
                     validator: (value) {
+                      setState(() {});
                       if (value == null || value.isEmpty) {
                         return 'Email is required';
                       } else if (!EmailValidator.validate(value)) {
                         return 'Please enter a valid email address';
+                      } else if (userlist.length == 0) {
+                        return 'No such email found!';
                       }
-
                       return null;
                     },
                     controller: _email,
@@ -99,11 +149,15 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     validator: (value) {
+                      setState(() {});
                       if (value == null || value.isEmpty) {
                         return 'Password is required';
+                      } else if (userlist.length != 0 && userlist[0]['password'] != _password.text) {
+                        return 'Incorrect password!';
                       }
                       return null;
                     },
+                    controller: _password,
                   ),
                 ),
                 const SizedBox(height: 45),
@@ -167,30 +221,47 @@ class _LoginState extends State<Login> {
                     backgroundColor: const Color.fromRGBO(33, 216, 161, 1),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                     onPressed: () {
+                      _getUser(_email.text);
+                      setState(() {});
+                      // print("Email entered: ${_email.text}");
                       if (_formKey.currentState?.validate() ?? false) {
-                        // print(_email.text);
-                        setState(() {
-                          username = _email.text.split("@")[0];
-                        });
-                        _formKey.currentState?.save();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => HomeNav(namee: _email.text.split("@")[0]),
-                          ),
-                        );
+                        setState(() {});
+                        if (userlist[0]['name'] != null) {
+                          // var name = user['name']!.split(" ")[0];
+                          // var name = userlist[0]['name'];
+                          _formKey.currentState?.save();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomeNav(namee: userlist[0]['name']),
+                            ),
+                          );
 
-                        final snackBar = SnackBar(
-                          content: const Text('Login Successful!'),
-                          action: SnackBarAction(
-                            label: 'OK',
-                            onPressed: () {
-                              // Some code to undo the change.
-                            },
-                          ),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          final snackBar = SnackBar(
+                            content: const Text('Login Successful!'),
+                            action: SnackBarAction(
+                              label: 'OK',
+                              onPressed: () {
+                                // Some code to undo the change.
+                              },
+                            ),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        } else {
+                          final snackBar = SnackBar(
+                            content: const Text('Invalid email address'),
+                            action: SnackBarAction(
+                              label: 'OK',
+                              onPressed: () {
+                                // Some code to undo the change.
+                              },
+                            ),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
                       }
+
+                      // SQL PART
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

@@ -178,8 +178,8 @@ class _MoreState extends State<More> {
                                     IconButton(
                                       icon: const FaIcon(FontAwesomeIcons.instagram),
                                       onPressed: () {
-                                        launchURL('instagram.com', 'https');
-                                        // launchURL('instagram.com/nishantt.nez/', 'https');
+                                        // launchURL('instagram.com', 'https');
+                                        launchURL('instagram.com/nishantt.nez/', 'https');
                                         print('presed');
                                       },
                                     ),
