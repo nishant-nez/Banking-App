@@ -124,7 +124,7 @@ class EMICalculatorState extends State<EMICalculator> {
                             decoration: InputDecoration(
                               labelText: 'Principle Amount',
                               labelStyle: const TextStyle(
-                                color: Colors.black,
+                                color: Color.fromRGBO(11, 19, 22, 0.4),
                               ),
                               filled: true,
                               fillColor: const Color.fromRGBO(245, 245, 245, 1),
@@ -160,7 +160,7 @@ class EMICalculatorState extends State<EMICalculator> {
                             decoration: InputDecoration(
                               labelText: 'Interest Rate',
                               labelStyle: const TextStyle(
-                                color: Colors.black,
+                                color: Color.fromRGBO(11, 19, 22, 0.4),
                               ),
                               filled: true,
                               fillColor: const Color.fromRGBO(245, 245, 245, 1),
@@ -203,7 +203,7 @@ class EMICalculatorState extends State<EMICalculator> {
                                   decoration: InputDecoration(
                                     labelText: 'Tenure',
                                     labelStyle: const TextStyle(
-                                      color: Colors.black,
+                                      color: Color.fromRGBO(11, 19, 22, 0.4),
                                     ),
                                     filled: true,
                                     fillColor: const Color.fromRGBO(245, 245, 245, 1),

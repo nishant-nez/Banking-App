@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:banking_app/pages/home_page.dart';
 import 'package:banking_app/pages/signup.dart';
 import 'package:banking_app/widgets/sql_helper.dart';
@@ -32,17 +30,32 @@ class _LoginState extends State<Login> {
   // SQL PART
   bool _isloading = true;
 
-  void _getUser(String email) async {
-    final data = await SQLHelper.getEmail(email);
-    setState(() {
-      userlist = data;
-      sleep(const Duration(seconds: 1));
-      _isloading = false;
-      // print('VALUE FROM SQL EMAIL SEARCH----------------');
-      // print('entered email: $email');
-      // print(userlist.length);
-      // print(userlist);
-      // print(userlist[0]['name']);
+  // void _getUser(String email) async {
+  //   final data = await SQLHelper.getEmail(email);
+  //   setState(() {
+  //     userlist = data;
+  //     // sleep(const Duration(milliseconds: 500));
+  //     _isloading = false;
+  //     // print('VALUE FROM SQL EMAIL SEARCH----------------');
+  //     // print('entered email: $email');
+  //     // print(userlist.length);
+  //     // print(userlist);
+  //     // print(userlist[0]['name']);
+  //   });
+  // }
+
+  void _getUser(String email) {
+    SQLHelper.getEmail(email).then((data) {
+      setState(() {
+        userlist = data;
+        // sleep(const Duration(milliseconds: 500));
+        _isloading = false;
+        // print('VALUE FROM SQL EMAIL SEARCH----------------');
+        // print('entered email: $email');
+        // print(userlist.length);
+        // print(userlist);
+        // print(userlist[0]['name']);
+      });
     });
   }
 
@@ -117,6 +130,7 @@ class _LoginState extends State<Login> {
                     ),
                     validator: (value) {
                       setState(() {});
+                      // sleep(const Duration(milliseconds: 500));
                       if (value == null || value.isEmpty) {
                         return 'Email is required';
                       } else if (!EmailValidator.validate(value)) {
@@ -150,6 +164,7 @@ class _LoginState extends State<Login> {
                     ),
                     validator: (value) {
                       setState(() {});
+                      // sleep(const Duration(milliseconds: 500));
                       if (value == null || value.isEmpty) {
                         return 'Password is required';
                       } else if (userlist.length != 0 && userlist[0]['password'] != _password.text) {

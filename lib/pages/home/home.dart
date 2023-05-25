@@ -12,6 +12,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final List<Map<String, String>> users = [];
+  String accno = 'XXXX-XXXX-XXXX-XXXX';
+  String balance = 'XX,XXX';
+  bool hidden = true;
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -32,17 +37,101 @@ class _HomeState extends State<Home> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: Image(
-                      image: AssetImage('assets/images/user.png'),
+                  GestureDetector(
+                    child: const CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: Image(
+                        image: AssetImage('assets/images/user.png'),
+                      ),
                     ),
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/images/user.png'),
+                                  height: 40,
+                                ),
+                                SizedBox(width: 20),
+                                Column(
+                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  // textBaseline: ,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  // textDirection: ,
+                                  children: [
+                                    Text(
+                                      '${userlist[0]['name']}',
+                                      textAlign: TextAlign.left,
+                                    ),
+                                    Text(
+                                      '${userlist[0]['email']}',
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            content: Container(
+                              decoration: BoxDecoration(
+                                // color: Colors.grey[170],
+                                color: Color.fromRGBO(208, 209, 211, 0.1),
+                                borderRadius: BorderRadius.all(Radius.circular(20)),
+                              ),
+                              // color: Colors.grey[100],
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Login(users: users),
+                                    ),
+                                  );
+                                },
+                                child: Row(children: [
+                                  Icon(Icons.logout),
+                                  SizedBox(width: 10),
+                                  Text('Logout'),
+                                ]),
+                              ),
+                            ),
+                            actions: [
+                              Container(
+                                height: 40,
+                                width: 70,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                                  color: Color.fromRGBO(136, 104, 255, 1),
+                                ),
+                                child: TextButton(
+                                  child: const Text(
+                                    "Close",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
                   ),
                 ],
               ),
             ),
             Container(
-              height: screenHeight * 0.23,
+              height: screenHeight * 0.25,
               width: double.infinity,
               // color: Colors.yellow,
               decoration: BoxDecoration(boxShadow: [
@@ -69,7 +158,7 @@ class _HomeState extends State<Home> {
                     Row(
                       children: [
                         Text(
-                          'रु 67,000',
+                          'रु $balance',
                           style: GoogleFonts.inriaSans(
                             fontSize: 29,
                             fontWeight: FontWeight.bold,
@@ -99,11 +188,34 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    Text(
-                      'SAVINGS ACCOUNT\nXXXX-XXXX-XXXX-XXXX',
-                      style: GoogleFonts.inriaSans(
-                        color: Colors.grey,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          'SAVINGS ACCOUNT\n$accno',
+                          style: GoogleFonts.inriaSans(
+                            color: Colors.grey,
+                            fontSize: 16,
+                          ),
+                        ),
+                        const SizedBox(width: 75),
+                        TextButton.icon(
+                          onPressed: () {
+                            setState(() {
+                              if (hidden) {
+                                accno = '6945-8136-7468-9636';
+                                balance = '67,000';
+                                hidden = false;
+                              } else {
+                                accno = 'XXXX-XXXX-XXXX-XXXX';
+                                balance = 'XX,XXX';
+                                hidden = true;
+                              }
+                            });
+                          },
+                          icon: Icon(Icons.remove_red_eye),
+                          label: Text(''),
+                        ),
+                      ],
                     ),
                   ],
                 ),

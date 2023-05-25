@@ -111,7 +111,7 @@ class _MoreState extends State<More> {
             Positioned(
               top: screenHeight * 0.62,
               child: const Contact(
-                icon: Icons.browser_not_supported,
+                icon: Icons.open_in_browser,
                 title: "Vist",
                 value: "nishantkhadka.com.np",
                 type: "https",
@@ -178,8 +178,8 @@ class _MoreState extends State<More> {
                                     IconButton(
                                       icon: const FaIcon(FontAwesomeIcons.instagram),
                                       onPressed: () {
-                                        // launchURL('instagram.com', 'https');
-                                        launchURL('instagram.com/nishantt.nez/', 'https');
+                                        launchURL('instagram.com', 'https');
+                                        // launchURL('instagram.com/nishantt.nez/', 'https');
                                         print('presed');
                                       },
                                     ),

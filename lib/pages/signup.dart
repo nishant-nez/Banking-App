@@ -34,6 +34,7 @@ class _SignUpState extends State<SignUp> {
   final _name = TextEditingController();
   final _email = TextEditingController();
   final _password = TextEditingController();
+  final _confirmPassword = TextEditingController();
 
   // SQL ADD
   Future<void> _addItem() async {
@@ -149,10 +150,42 @@ class _SignUpState extends State<SignUp> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Password is required';
+                      } else if (_password.text != _confirmPassword.text) {
+                        return 'Passwords do not match';
                       }
                       return null;
                     },
                     controller: _password,
+                  ),
+                ),
+                const SizedBox(height: 30),
+                SizedBox(
+                  width: screenWidth * 0.8,
+                  child: TextFormField(
+                    style: GoogleFonts.inriaSans(
+                      color: Colors.white,
+                      fontSize: 17,
+                    ),
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: 'Confirm Password',
+                      labelStyle: const TextStyle(color: Color.fromRGBO(90, 87, 103, 1)),
+                      filled: true,
+                      fillColor: const Color.fromRGBO(20, 15, 38, 1),
+                      contentPadding: const EdgeInsets.all(20),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Password is required';
+                      } else if (_password.text != _confirmPassword.text) {
+                        return 'Passwords do not match';
+                      }
+                      return null;
+                    },
+                    controller: _confirmPassword,
                   ),
                 ),
                 const SizedBox(height: 50),
@@ -179,10 +212,11 @@ class _SignUpState extends State<SignUp> {
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
                         _addItem();
+                        _name.clear();
+                        _email.clear();
+                        _password.clear();
+                        _confirmPassword.clear();
                       }
-                      _name.clear();
-                      _email.clear();
-                      _password.clear();
 
                       // SQLLL
 
@@ -202,7 +236,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 20),
                 TextButton(
                   onPressed: () {
                     Navigator.push(
